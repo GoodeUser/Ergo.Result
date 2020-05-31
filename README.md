@@ -1,5 +1,5 @@
 <p align="center"><img src="/logo.png?raw=true" width="150"></p>
-<h1 align="center">Result type with chainable validations</h1>
+<h1 align="center">Result type with the ability to chain computations</h1>
  
 <div align="center">
 
