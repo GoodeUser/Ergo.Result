@@ -18,8 +18,14 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
-      run: cd Ergo && dotnet restore
+      run: |
+        cd Ergo
+        dotnet restore
     - name: Build
-      run: cd Ergo && dotnet build --configuration Release --no-restore
+      run: |
+        cd Ergo
+        dotnet build --configuration Release --no-restore
     - name: Test
-      run: cd Ergo.Tests && dotnet test --no-restore --verbosity normal
+      run: |
+        cd Ergo.Tests
+        dotnet test --no-restore --verbosity normal
