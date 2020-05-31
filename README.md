@@ -5,7 +5,7 @@
 
 Some text
 
-![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg)
+![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/GoodeUser/Ergo/branch/master/graph/badge.svg?token=8XDVMVSNIC)](https://codecov.io/gh/GoodeUser/Ergo) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg)
 
 </div>
 
