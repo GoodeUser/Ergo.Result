@@ -14,6 +14,8 @@ Some text
 Use `Result` whenever an operation has the possibility of failure. Consider the following example of a method that loads a user from a database when accessing an API.
 
 ```cs
+using static Ergo.Result;
+
 public async Task<Result<User>> GetUserFromSecretKey(string secretKey)
 {
     var userInfo = await _apiUserRepository.GetBySecretKey(secretKey);
