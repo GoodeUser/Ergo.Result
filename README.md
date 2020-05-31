@@ -2,8 +2,6 @@
     <img src="https://raw.githubusercontent.com/GoodeUser/Ergo/master/logo.png?token=AATXK4AGNQ3WRTAS3LWI4HK62MI6Q" width="150">
 </p>
 
-<h1 align="center">Ergo</h1>
-
 <div align="center">
 
 An opinionated Result type that handles all of the heavy lifting so you'll never have to write another custom results wrapper.
