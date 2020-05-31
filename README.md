@@ -1,9 +1,10 @@
-<p align="center">
-    <img src="https://raw.githubusercontent.com/GoodeUser/Ergo/master/logo.png?token=AATXK4AGNQ3WRTAS3LWI4HK62MI6Q" width="150">
-</p>
-
+<p align="center"><img src="/logo.png?raw=true" width="150"></p>
+<h1 align="center">C# Result type with chainable validations.</h1>
+ 
 <div align="center">
 
-An opinionated Result type that handles all of the heavy lifting so you'll never have to write another custom results wrapper.
+Some text
 
-![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg)
+![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) ![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg)
+
+</div>
