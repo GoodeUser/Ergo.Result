@@ -16,15 +16,15 @@ using static Ergo.Result;
 
 public async Result<User> GetUserFromSecretKey(string secretKey)
 {
-    var userInfo = _userRepository.GetBySecretKey(secretKey);
+    var user = _userRepository.GetBySecretKey(secretKey);
 
-    if (userInfo == null)
+    if (user == null)
         return Failure<User>("Secret Key Invalid.");
 
-    if (!userInfo.IsEnabled)
+    if (!user.IsEnabled)
         return Failure<User>("User isn't allowed access");
 
-    return Success(userInfo);
+    return Success(user);
 }
 ```
 And the consuming code might look something like this:
