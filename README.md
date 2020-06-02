@@ -31,6 +31,7 @@ And the consuming code might look something like this:
 ```cs
 public async Task<Result<User>> GetAuthorizedUser()
 {
+    // Did I mention that you can use async computations?
     return await GetAuthorizationHeader(Context)
         .OnSuccess(GetSecretKeyFromAuthorizationHeader) // Only runs if the header is found
         .OnSuccess(GetUserFromSecretKey) // only runs if retrieving the "secret key" was successful
