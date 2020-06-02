@@ -2,6 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Ergo</AssemblyName>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
-
+  
+  <PropertyGroup>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageVersion>0.1.0</PackageVersion>
+    <PackageId>Ergo</PackageId>
+    <Authors>Kyle Goode</Authors>
+    <PackageIconUrl>https://raw.githubusercontent.com/GoodeUser/Ergo/master/icon.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/GoodeUser/Ergo/LICENSE</PackageLicenseUrl>
+    <Owners>GoodeUser</Owners>
+    <PackageProjectUrl>https://github.com/GoodeUser/Ergo</PackageProjectUrl>
+    <Summary>Result type with the ability to chain computations</Summary>
+    <PackageTags>Result type;Railway Oriented Programming;Either Type;Result Wrapper;Rust;F#;Either Monad;Result Monad</PackageTags>
+    <Description>Result type with the ability to chain computations</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
+  
 </Project>
