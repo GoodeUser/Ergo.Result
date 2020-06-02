@@ -3,7 +3,10 @@
  
 <div align="center">
 
-![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/GoodeUser/Ergo/branch/master/graph/badge.svg?token=8XDVMVSNIC)](https://codecov.io/gh/GoodeUser/Ergo) ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg) ![nuget](https://img.shields.io/nuget/v/Ergo)
+![build](https://github.com/GoodeUser/Ergo/workflows/build/badge.svg)
+[![codecov](https://codecov.io/gh/GoodeUser/Ergo/branch/master/graph/badge.svg?token=8XDVMVSNIC)](https://codecov.io/gh/GoodeUser/Ergo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/GoodeUser/Ergo/blob/master/LICENSE)
+[![nuget](https://img.shields.io/nuget/v/Ergo)](https://www.nuget.org/packages/Ergo/)
 
 </div>
 
