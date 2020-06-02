@@ -14,7 +14,7 @@ Use `Result` whenever an operation has the possibility of failure. Consider the 
 ```cs
 using static Ergo.Result;
 
-public async Result<User> GetUserFromSecretKey(string secretKey)
+public Result<User> GetUserFromSecretKey(string secretKey)
 {
     var user = _userRepository.GetBySecretKey(secretKey);
 
