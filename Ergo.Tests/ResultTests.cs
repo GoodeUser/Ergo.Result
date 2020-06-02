@@ -260,7 +260,7 @@ namespace Ergo.Tests
         }
 
         [Fact]
-        public async Task CanAddMessages()
+        public void CanAddMessages()
         {
             var result = Result.Success();
             
