@@ -258,5 +258,18 @@ namespace Ergo.Tests
 
             Assert.True(r3.IsSuccessful);
         }
+
+        [Fact]
+        public async Task CanAddMessages()
+        {
+            var result = Result.Success();
+            
+            var resultWithMessage = result
+                .WithMessages("jon snow")
+                .WithMessages("is a bastard");
+                
+            Assert.Equal("jon snow", resultWithMessage.Messages.First());
+            Assert.Equal("is a bastard", resultWithMessage.Messages.ElementAt(1));
+        }
     }
 }

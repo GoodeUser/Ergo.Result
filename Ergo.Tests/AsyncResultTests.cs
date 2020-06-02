@@ -180,5 +180,18 @@ namespace Ergo.Tests
             Assert.True(result.IsSuccessful);
             Assert.Equal("test", result.Value);
         }
+
+        [Fact]
+        public async Task CanAddMessages()
+        {
+            AsyncResult result = Result.Success();
+            
+            var resultWithMessage = await result
+                .WithMessages("jon snow")
+                .WithMessages("is a bastard");
+                
+            Assert.Equal("jon snow", resultWithMessage.Messages.First());
+            Assert.Equal("is a bastard", resultWithMessage.Messages.ElementAt(1));
+        }
     }
 }

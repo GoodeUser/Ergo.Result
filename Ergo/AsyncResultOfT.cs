@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -142,6 +143,14 @@ namespace Ergo
             if (result.IsFailure)
                 return mapper(result.Value);
 
+            return result;
+        }
+
+        public AsyncResult<T> WithMessages(params string[] messages) => WithMessagesA(messages);
+        private async Task<Result<T>> WithMessagesA(string[] messages)
+        {
+            var result = await this;
+            result.Messages = result.Messages.Concat(messages);
             return result;
         }
     }

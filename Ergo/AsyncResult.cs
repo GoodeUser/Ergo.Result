@@ -141,5 +141,13 @@ namespace Ergo
             return result as Result<TOut> ??
                 new Result<TOut>(default(TOut), result.Messages, isSuccessful: true);
         }
+
+        public AsyncResult WithMessages(params string[] messages) => WithMessagesA(messages);
+        private async Task<Result> WithMessagesA(string[] messages)
+        {
+            var result = await this;
+            result.Messages = result.Messages.Concat(messages);
+            return result;
+        }
     }
 }

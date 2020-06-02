@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -213,6 +214,19 @@ namespace Ergo.Tests
             Assert.Throws<ArgumentNullException>(() => {
                 new AsyncResult<string>(null);
             });
+        }
+
+        [Fact]
+        public async Task CanAddMessages()
+        {
+            AsyncResult<string> implicitValue = "test";
+            
+            var resultWithMessage = await implicitValue
+                .WithMessages("jon snow")
+                .WithMessages("is a bastard");
+                
+            Assert.Equal("jon snow", resultWithMessage.Messages.First());
+            Assert.Equal("is a bastard", resultWithMessage.Messages.ElementAt(1));
         }
     }
 }

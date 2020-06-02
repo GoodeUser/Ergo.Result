@@ -13,7 +13,7 @@ namespace Ergo
     {
         public bool IsSuccessful { get; private set; }
         public bool IsFailure => !IsSuccessful;
-        public IEnumerable<string> Messages { get; private set; }
+        public IEnumerable<string> Messages { get; internal set; }
 
         internal Result(IEnumerable<string> messages = null, bool isSuccessful = true)
         {
@@ -145,5 +145,11 @@ namespace Ergo
 
         public Result Join(Result other) =>
             Result.Join(other);
+
+        public Result WithMessages(params string[] messages)
+        {
+            this.Messages = this.Messages.Concat(messages);
+            return this;
+        }
     }
 }
