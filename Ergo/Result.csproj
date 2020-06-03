@@ -21,7 +21,6 @@
     <PackageTags>Result type;Railway Oriented Programming;Either Type;Result Wrapper;Rust;F#;Either Monad;Result Monad</PackageTags>
     <Description>Result type with the ability to chain computations</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
