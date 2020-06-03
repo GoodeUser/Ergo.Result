@@ -15,11 +15,14 @@
     <PackageIcon>icon.png</PackageIcon>
     <Owners>GoodeUser</Owners>
     <PackageProjectUrl>https://github.com/GoodeUser/Ergo</PackageProjectUrl>
+    <RepositoryUrl>https:// github.com/GoodeUser/Ergo</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <Summary>Result type with the ability to chain computations</Summary>
     <PackageTags>Result type;Railway Oriented Programming;Either Type;Result Wrapper;Rust;F#;Either Monad;Result Monad</PackageTags>
     <Description>Result type with the ability to chain computations</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
