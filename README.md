@@ -10,7 +10,15 @@
 
 </div>
 
-## Use
+## ✨ Features
+* A Result type that lets you wrap another return type `Result<T>`
+* Chainable validations/computations (handles the [Defensive Programming](https://en.wikipedia.org/wiki/Defensive_programming))
+* First class `async` support - lets you chain validations on async methods
+* Inspired by functional languages but designed to be pragmatic for Object Oriented Programming.
+* Lets you fall back to a base class `Result` if you don't care about the response held inside (much like `Task<T>` does)
+* 100% test coverage
+
+## ⚙️ Use
 
 Use `Result` whenever an operation has the possibility of failure. Consider the following example of a method that loads a user from a database when accessing an API.
 
