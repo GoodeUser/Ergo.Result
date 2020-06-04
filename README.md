@@ -14,8 +14,8 @@
 * A Result type that lets you wrap another return type `Result<T>`
 * Chainable validations/computations (handles the [Defensive Programming](https://en.wikipedia.org/wiki/Defensive_programming))
 * First class `async` support - lets you chain validations on async methods
-* Inspired by functional languages but designed to be pragmatic for Object Oriented Programming.
-* Lets you fall back to a base class `Result` if you don't care about the response held inside (much like `Task<T>` does)
+* Inspired by functional languages but designed for Object Oriented Programming.
+* Lets you fall back to a base `Result` class if you don't care about the response held inside (much like `Task<T>` does)
 * 100% test coverage
 
 ## ⚙️ Use
