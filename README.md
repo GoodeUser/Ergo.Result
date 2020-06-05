@@ -19,33 +19,33 @@
 * 100% test coverage
 
 ## ⚙️ Use
-
-Use `Result` whenever an operation has the possibility of failure. Consider the following example of a method that loads a user from a database when accessing an API.
-
+Return a `Result` class from a method that can fail:
 ```cs
 using static Ergo.Result;
 
-public Result<User> GetUserFromSecretKey(string secretKey)
+public Result<string> GetName(Dictionary<string, object> input)
 {
-    var user = _userRepository.GetBySecretKey(secretKey);
+    return input.HasKey("full_name")
+        ? Success((string)input["full_name"])
+        : Failure<string>("There was no 'full_name' key available in the dictionary");
+}
 
-    if (user == null)
-        return Failure<User>("Secret Key Invalid.");
+public Result<string> GetFirstName(string fullName)
+{
+    var nameParts = fullName.Split(' ');
 
-    if (!user.IsEnabled)
-        return Failure<User>("User isn't allowed access");
-
-    return Success(user);
+    return nameParts.Length > 1
+        ? Success("")
+        : Failure<string>("Ensure both a first and last name were submitted");
 }
 ```
-And the consuming code might look something like this:
+Once you have a `Result`, you can chain other methods that also return a `Result` class.
 ```cs
-public async Task<Result<User>> GetAuthorizedUser()
+public Result<string> GetNameFromJson(string json)
 {
-    // Did I mention that you can use async computations?
-    return await GetAuthorizationHeader(Context)
-        .OnSuccess(GetSecretKeyFromAuthorizationHeader) // Only runs if the header is found
-        .OnSuccess(GetUserFromSecretKey) // only runs if retrieving the "secret key" was successful
-        .OnFailure((failures) => FormatMessages(failures, CultureInfo.InvariantCulture));
+    return SerializeDictionaryFromJson(json)
+        .OnSuccess((jsonDictionary) => GetName(jsonDictionary))
+        .OnSuccess((fullName) => GetFirstName(fullName));
+        .OnFailure((failures) => FormatFailureMessages(failures))
 }
 ```
