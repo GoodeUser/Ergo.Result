@@ -1,5 +1,5 @@
 <p align="center"><img src="/logo.png?raw=true" width="150"></p>
-<h1 align="center">Result type with the ability to chain computations</h1>
+<h1 align="center">Result type with the ability to chain computations and first class Task/async support.</h1>
  
 <div align="center">
 
