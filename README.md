@@ -11,7 +11,7 @@
 </div>
 
 ## ✨ Features
-* A Result type that lets you wrap another return type `Result<T>`
+* A Result type that lets you wrap a return type `Result<T>`
 * Chainable validations/computations (handles the [Defensive Programming](https://en.wikipedia.org/wiki/Defensive_programming))
 * First class `async` support - lets you chain validations on async methods
 * Inspired by functional languages but designed for Object Oriented Programming.
