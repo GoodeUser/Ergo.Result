@@ -49,3 +49,44 @@ public Result<string> GetNameFromJson(string json)
         .OnFailure((failures) => FormatFailureMessages(failures))
 }
 ```
+### Async support
+`Ergo` was designed to work well even in Async situations. For instance, continuing from our previous example, any method can return a `Task<Result<T>>` can be chained and used just like any other method. The only thing that changes is that you would then call `await` on the resulting object.
+
+```cs
+using static Ergo.Result;
+
+public async Task<Result<User>> GetUserFromSecretKey(string secretKey)
+{
+    var user = await _userRepository.GetBySecretKey(secretKey);
+    
+    if (user is null)
+        return Failure<User>("User isn't allowed access");
+
+    return Success(user);
+}
+```
+Any method that returns a `Result` from an async method can be chained like any other method that returns a `Result`. The consuming code would look something like this:
+```cs
+public async Task<Result<User>> GetAuthorizedUser()
+{
+    var asyncResult = GetAuthorizationHeader(Context)
+        .OnSuccess(GetSecretKeyFromAuthorizationHeader)
+        .OnSuccess(GetUserFromSecretKey) // this is the only method that is async - it returns a Task<Result<User>>
+        .OnSuccess(ValidateUserIsActive);
+        
+    var result = await asyncResult; // we can await the response just like a Task!!!
+    
+    if (result.IsSuccessful)
+        Console.WriteLine("It was successful");
+    
+    return result;
+}
+```
+The ability to have the same methods available when a method returns a Task is achieved by converting the `Task<Result>` to a class `AsyncResult` behind the scenes. `AsyncResult` is designed to be fully compatible with a normal `Result` class and has the exact same methods and usage. Once you have an `AsyncResult` class, you just await it to pull out the `Result` object.
+
+If you start out with a `Task<Result>` or `Task<Result<T>>` and want to convert it to an `AsyncResult`, there are constructors designed to help with the conversion.
+```cs
+var taskResult = Task.FromResult(Result.Success(""));
+var asyncResult = new AsyncResult(taskResult);
+// Now you can use all of the methods that `Result` has like `OnSuccess`, etc.
+```
