@@ -8,7 +8,7 @@
   
   <PropertyGroup>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.1.4</PackageVersion>
+    <PackageVersion>0.1.5</PackageVersion>
     <PackageId>Ergo</PackageId>
     <Authors>Kyle Goode</Authors>
     <PackageIconUrl>https://raw.githubusercontent.com/GoodeUser/Ergo/master/icon.png?raw=true</PackageIconUrl>
@@ -17,9 +17,9 @@
     <PackageProjectUrl>https://github.com/GoodeUser/Ergo</PackageProjectUrl>
     <RepositoryUrl>https://github.com/GoodeUser/Ergo.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Summary>Result type with the ability to chain computations</Summary>
+    <Summary>Result type written in C# with the ability to chain computations and first class Task/async support.</Summary>
     <PackageTags>Result type;Railway Oriented Programming;Either Type;Result Wrapper;Rust;F#;Either Monad;Result Monad</PackageTags>
-    <Description>Result type with the ability to chain computations</Description>
+    <Description>Result type written in C# with the ability to chain computations and first class Task/async support</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
