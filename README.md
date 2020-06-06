@@ -35,7 +35,7 @@ public Result<string> GetFirstName(string fullName)
     var nameParts = fullName.Split(' ');
 
     return nameParts.Length > 1
-        ? Success("")
+        ? Success(nameParts.First())
         : Failure<string>("Ensure both a first and last name were submitted");
 }
 ```
