@@ -106,10 +106,10 @@ namespace Ergo.Tests
         [Fact]
         public async Task OnFailure_ResultOfT_ChainedFailure_()
         {
-            var result = await ((AsyncResult<int>)Result.Failure<int>())
-                .OnFailure((_) => Result.Failure());
+            var result = await ((AsyncResult<int>)Result.Failure<int>("a"))
+                .OnFailure((messages) => Result.Failure(messages.ToArray()));
 
-            Assert.True(result.IsFailure);
+            Assert.Equal("a", result.Messages.First());
         }
 
         [Fact]
@@ -220,13 +220,18 @@ namespace Ergo.Tests
         public async Task CanAddMessages()
         {
             AsyncResult<string> implicitValue = "test";
-            
+
             var resultWithMessage = await implicitValue
                 .WithMessages("jon snow")
                 .WithMessages("is a bastard");
                 
             Assert.Equal("jon snow", resultWithMessage.Messages.First());
             Assert.Equal("is a bastard", resultWithMessage.Messages.ElementAt(1));
+        }
+
+        public Result<string> Tr()
+        {
+            return true ?  Result.Success("true") : Result.Failure<string>();
         }
     }
 }

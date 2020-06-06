@@ -100,52 +100,6 @@ namespace Ergo
             return result;
         }
 
-        public AsyncResult<TOut> OnFailure<TOut>(Func<T, Task<Result<TOut>>> mapper) => OnFailureA(mapper);
-        private async Task<Result<TOut>> OnFailureA<TOut>(Func<T, Task<Result<TOut>>> mapper)
-        {
-            var result = await this;
-
-            if (result.IsFailure)
-                return await mapper(result.Value);
-
-            return result as Result<TOut> ??
-                new Result<TOut>(default(TOut), result.Messages, isSuccessful: true);
-        }
-
-        public AsyncResult OnFailure(Func<T, Task<Result>> mapper) => OnFailureA(mapper);
-        private async Task<Result> OnFailureA(Func<T, Task<Result>> mapper)
-        {
-            var result = await this;
-
-            if (result.IsFailure)
-                return await mapper(result.Value);
-
-            return result;
-        }
-
-        public AsyncResult<TOut> OnFailure<TOut>(Func<T, Result<TOut>> mapper) => OnFailureA(mapper);
-        private async Task<Result<TOut>> OnFailureA<TOut>(Func<T, Result<TOut>> mapper)
-        {
-            var result = await this;
-
-            if (result.IsFailure)
-                return mapper(result.Value);
-
-            return result as Result<TOut> ??
-                new Result<TOut>(default(TOut), result.Messages, isSuccessful: true);
-        }
-
-        public AsyncResult OnFailure(Func<T, Result> mapper) => OnFailureA(mapper);
-        private async Task<Result> OnFailureA(Func<T, Result> mapper)
-        {
-            var result = await this;
-
-            if (result.IsFailure)
-                return mapper(result.Value);
-
-            return result;
-        }
-
         public AsyncResult<T> WithMessages(params string[] messages) => WithMessagesA(messages);
         private async Task<Result<T>> WithMessagesA(string[] messages)
         {

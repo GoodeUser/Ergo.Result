@@ -131,6 +131,40 @@ namespace Ergo
             return this;
         }
 
+        public Result OnFailure(Func<IEnumerable<string>, Result> mapper)
+        {
+            if (IsFailure)
+                return mapper(Messages);
+
+            return this;
+        }
+
+        public Result<TOut> OnFailure<TOut>(Func<IEnumerable<string>, Result<TOut>> mapper)
+        {
+            if (IsFailure)
+                return mapper(Messages);
+
+            return this as Result<TOut> ??
+                new Result<TOut>(default(TOut), Messages, isSuccessful: true);
+        }
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<IEnumerable<string>, Task<Result<TOut>>> mapper)
+        {
+            if (IsFailure)
+                return mapper(Messages);
+
+            return this as Result<TOut> ??
+                new Result<TOut>(default(TOut), Messages, isSuccessful: true);
+        }
+
+        public AsyncResult OnFailure(Func<IEnumerable<string>, Task<Result>> mapper)
+        {
+            if (IsFailure)
+                return mapper(Messages);
+
+            return this;
+        }
+
         public static Result operator +(Result a, Result b) => Join(a, b);
 
         public static Task<Result> operator +(Result a, Task<Result> b) =>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ergo
@@ -61,37 +62,9 @@ namespace Ergo
             return this;
         }
 
-        public Result OnFailure(Func<T, Result> mapper)
+        public new Result<T> WithMessages(params string[] messages)
         {
-            if (IsFailure)
-                return mapper(Value);
-
-            return this;
-        }
-
-        public Result<TOut> OnFailure<TOut>(Func<T, Result<TOut>> mapper)
-        {
-            if (IsFailure)
-                return mapper(Value);
-
-            return this as Result<TOut> ??
-                new Result<TOut>(default(TOut), Messages, isSuccessful: true);
-        }
-
-        public AsyncResult<TOut> OnFailure<TOut>(Func<T, Task<Result<TOut>>> mapper)
-        {
-            if (IsFailure)
-                return mapper(Value);
-
-            return this as Result<TOut> ??
-                new Result<TOut>(default(TOut), Messages, isSuccessful: true);
-        }
-
-        public AsyncResult OnFailure(Func<T, Task<Result>> mapper)
-        {
-            if (IsFailure)
-                return mapper(Value);
-
+            this.Messages = this.Messages.Concat(messages);
             return this;
         }
     }

@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Ergo
@@ -6,6 +9,8 @@ namespace Ergo
     public abstract class AsyncResultBase
     {
         public abstract Task<Result> GetTaskResult();
+
+        private TaskAwaiter<Result> GetAwaiter() => GetTaskResult().GetAwaiter();
 
         public static AsyncResult operator +(AsyncResultBase a, AsyncResultBase b) =>
             Join(a, b);
@@ -29,6 +34,98 @@ namespace Ergo
         {
             var aResult = await a.GetTaskResult();
             return Result.Join(aResult, b);
+        }
+
+        public AsyncResult OnFailure(Func<Task<Result>> mapper) => OnFailureA(mapper);
+        private async Task<Result> OnFailureA(Func<Task<Result>> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await mapper();
+
+            return result;
+        }
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<Task<Result<TOut>>> mapper) => OnFailureA(mapper);
+        private async Task<Result<TOut>> OnFailureA<TOut>(Func<Task<Result<TOut>>> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await mapper();
+
+            return result as Result<TOut> ??
+                new Result<TOut>(default(TOut), result.Messages, isSuccessful: true);
+        }
+
+        public AsyncResult OnFailure(Func<Result> mapper) => OnFailureA(mapper);
+        private async Task<Result> OnFailureA(Func<Result> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await Task.FromResult(mapper());
+
+            return result;
+        }
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<Result<TOut>> mapper) => OnFailureA(mapper);
+        private async Task<Result<TOut>> OnFailureA<TOut>(Func<Result<TOut>> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await Task.FromResult(mapper());
+
+            return result as Result<TOut> ??
+                new Result<TOut>(default(TOut), result.Messages, isSuccessful: true);
+        }
+
+        public AsyncResult OnFailure(Func<IEnumerable<string>, Task<Result>> mapper) => OnFailureA(mapper);
+        private async Task<Result> OnFailureA(Func<IEnumerable<string>, Task<Result>> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await mapper(result.Messages);
+
+            return result;
+        }
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<IEnumerable<string>, Task<Result<TOut>>> mapper) => OnFailureA(mapper);
+        private async Task<Result<TOut>> OnFailureA<TOut>(Func<IEnumerable<string>, Task<Result<TOut>>> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await mapper(result.Messages);
+
+            return result as Result<TOut> ??
+                new Result<TOut>(default(TOut), result.Messages, isSuccessful: true);
+        }
+
+        public AsyncResult OnFailure(Func<IEnumerable<string>, Result> mapper) => OnFailureA(mapper);
+        private async Task<Result> OnFailureA(Func<IEnumerable<string>, Result> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await Task.FromResult(mapper(result.Messages));
+
+            return result;
+        }
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<IEnumerable<string>, Result<TOut>> mapper) => OnFailureA(mapper);
+        private async Task<Result<TOut>> OnFailureA<TOut>(Func<IEnumerable<string>, Result<TOut>> mapper)
+        {
+            var result = await this;
+
+            if (result.IsFailure)
+                return await Task.FromResult(mapper(result.Messages));
+
+            return result as Result<TOut> ??
+                new Result<TOut>(default(TOut), result.Messages, isSuccessful: true);
         }
     }
 }
