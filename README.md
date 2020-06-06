@@ -16,7 +16,7 @@
 * First class `async` support - lets you chain validations on async methods
 * Inspired by functional languages but designed for Object Oriented Programming.
 * Falls back to a base `Result` class if you don't care about the contained response (much like `Task<T>` does)
-* 100% test coverage
+* Well tested
 
 ## ⚙️ Use
 Return a `Result` class from a method that can fail:
