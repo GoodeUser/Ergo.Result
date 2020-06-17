@@ -28,7 +28,7 @@ jobs:
     - name: Test
       run: |
         cd Ergo.Tests
-        dotnet test Ergo.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./../lcov.info --no-restore --verbosity normal
+        dotnet test Ergo.Tests.csproj /p:CollectCoverage=true --no-restore --verbosity normal
     - name: Codecov
       uses: codecov/codecov-action@v1.0.7
       with:
@@ -36,5 +36,3 @@ jobs:
         token: 4966c84d-99c1-426c-9ebd-15fb26e355d8
         # Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)
         flags: unittests
-        # path to coverage info 
-        file: lcov.info
