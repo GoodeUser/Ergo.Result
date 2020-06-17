@@ -36,3 +36,5 @@ jobs:
         token: 4966c84d-99c1-426c-9ebd-15fb26e355d8
         # Flag upload to group coverage metrics (e.g. unittests | integration | ui,chrome)
         flags: unittests
+        # path to coverage info 
+        file: Ergo.Tests/lcov.info
