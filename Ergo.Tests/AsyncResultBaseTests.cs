@@ -217,5 +217,25 @@ namespace Ergo.Tests
             Assert.True(response.IsSuccessful);
             Assert.Equal("a", response.Messages.First());
         }
+
+        [Fact]
+        public async Task JoinAsyncResultBase()
+        {
+            var result1 = (AsyncResult)Result.Success() as AsyncResultBase;
+            var result2 = (AsyncResult)Result.Success() as AsyncResultBase;
+
+            var result3 = AsyncResult.Join(result1, result2);
+            Assert.True((await result3).IsSuccessful);
+        }
+
+        [Fact]
+        public async Task JoinAsyncResultBase_OfT()
+        {
+            AsyncResult<string> result1 = Result.Success("a");
+            AsyncResult<string> result2 = Result.Success("b");
+
+            var result3 = result1 + result2;
+            Assert.True((await result3).IsSuccessful);
+        }
     }
 }

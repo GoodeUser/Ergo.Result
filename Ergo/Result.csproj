@@ -8,7 +8,7 @@
   
   <PropertyGroup>
     <PackOnBuild>true</PackOnBuild>
-    <PackageVersion>0.1.5</PackageVersion>
+    <PackageVersion>0.2.0</PackageVersion>
     <PackageId>Ergo</PackageId>
     <Authors>Kyle Goode</Authors>
     <PackageIconUrl>https://raw.githubusercontent.com/GoodeUser/Ergo/master/icon.png?raw=true</PackageIconUrl>

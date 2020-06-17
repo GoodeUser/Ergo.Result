@@ -38,5 +38,6 @@ msbuild.wrn
 
 # Code Coverage
 lcov.info
+coverage.xml
 
 *.nupkg
