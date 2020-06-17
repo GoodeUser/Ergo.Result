@@ -30,7 +30,9 @@ jobs:
         cd Ergo.Tests
         dotnet test Ergo.Tests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./../coverage.xml --verbosity normal
     - name: Log Files
-      run: ls .
+      run: |
+        ls .
+        ls Ergo.Tests
     - name: Codecov
       uses: codecov/codecov-action@v1.0.7
       with:
