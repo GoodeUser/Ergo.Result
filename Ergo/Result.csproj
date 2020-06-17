@@ -9,17 +9,17 @@
   <PropertyGroup>
     <PackOnBuild>true</PackOnBuild>
     <PackageVersion>0.2.0</PackageVersion>
-    <PackageId>Ergo</PackageId>
+    <PackageId>Ergo.Result</PackageId>
     <Authors>Kyle Goode</Authors>
-    <PackageIconUrl>https://raw.githubusercontent.com/GoodeUser/Ergo/master/icon.png?raw=true</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/GoodeUser/Ergo.Result/master/icon.png?raw=true</PackageIconUrl>
     <PackageIcon>icon.png</PackageIcon>
     <Owners>GoodeUser</Owners>
-    <PackageProjectUrl>https://github.com/GoodeUser/Ergo</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/GoodeUser/Ergo.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/GoodeUser/Ergo.Result</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/GoodeUser/Ergo.Result.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Summary>Result type written in C# with the ability to chain computations and first class Task/async support.</Summary>
+    <Summary>Result type written in C# with the ability to chain computations and first class Task/async support. Represents the ability for a computation to fail in a way more appropriate than throwing Exceptions in a lot of cases.</Summary>
     <PackageTags>Result type;Railway Oriented Programming;Either Type;Result Wrapper;Rust;F#;Either Monad;Result Monad</PackageTags>
-    <Description>Result type written in C# with the ability to chain computations and first class Task/async support</Description>
+    <Description>Result type written in C# with the ability to chain computations and first class Task/async support. Represents the ability for a computation to fail in a way more appropriate than throwing Exceptions in a lot of cases.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
