@@ -50,7 +50,7 @@ public Result<string> GetNameFromJson(string json)
 }
 ```
 ### Async support
-`Ergo` was designed to work well even in Async situations. For instance, continuing from our previous example, any method can return a `Task<Result<T>>` can be chained and used just like any other method. The only thing that changes is that you would then call `await` on the resulting object.
+`Ergo` was designed to work well even in Async situations. For instance, continuing from our previous example, any method that returns a `Task<Result<T>>` can be chained and used just like any other method. The only thing that changes is that you would then call `await` on the resulting object.
 
 ```cs
 using static Ergo.Result;
