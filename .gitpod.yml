@@ -1,0 +1,6 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: 'dotnet watch build ./Ergo/Result.csproj'
+    command: 'echo "TODO: Replace with command to start project"'
