@@ -1,20 +1,12 @@
 using System;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Ergo
 {
-    /// <summary>
-    /// Represents the result of some asynchronous operation.
-    /// 
-    /// This class is a wrapper around a Task<Result> so that you
-    /// can chain methods on asynchronous results as well. This class
-    /// is used internally but is not meant to be consumed directly.
-    /// </summary>
-    public class AsyncResult : AsyncResultBase
+    public struct AsyncResult : IAsyncChainableResult
     {
-        private Task<Result> _resultTask;
+        private readonly Task<Result> _resultTask;
 
         public AsyncResult(Task<Result> resultTask)
         {
@@ -43,65 +35,65 @@ namespace Ergo
             return toTask.ToTask();
         }
 
-        public override Task<Result> GetTaskResult() => _resultTask;
-
         public Task<Result> ToTask()
         {
             return _resultTask;
         }
 
-        public AsyncResult OnSuccess(Func<Task<Result>> mapper) => OnSuccessA(mapper);
-        private async Task<Result> OnSuccessA(Func<Task<Result>> mapper)
-        {
-            var result = await this;
-
-            if (result.IsSuccessful)
-                return await mapper();
-
-            return result;
-        }
-
-        public AsyncResult<TOut> OnSuccess<TOut>(Func<Task<Result<TOut>>> mapper) => OnSuccessA(mapper);
-        private async Task<Result<TOut>> OnSuccessA<TOut>(Func<Task<Result<TOut>>> mapper)
-        {
-            var result = await this;
-
-            if (result.IsSuccessful)
-                return await mapper();
-
-            return result as Result<TOut> ??
-                new Result<TOut>(default(TOut), result.Messages, isSuccessful: false);
-        }
-
         public AsyncResult OnSuccess(Func<Result> mapper) => OnSuccessA(mapper);
-        private async Task<Result> OnSuccessA(Func<Result> mapper)
-        {
-            var result = await this;
-
-            if (result.IsSuccessful)
-                return await Task.FromResult(mapper());
-
-            return result;
-        }
+        public async Task<Result> OnSuccessA(Func<Result> mapper) =>
+            (await this).OnSuccess(mapper);
 
         public AsyncResult<TOut> OnSuccess<TOut>(Func<Result<TOut>> mapper) => OnSuccessA(mapper);
-        private async Task<Result<TOut>> OnSuccessA<TOut>(Func<Result<TOut>> mapper)
-        {
-            var result = await this;
+        public async Task<Result<TOut>> OnSuccessA<TOut>(Func<Result<TOut>> mapper) =>
+            (await this).OnSuccess(mapper);
 
-            if (result.IsSuccessful)
-                return await Task.FromResult(mapper());
+        public AsyncResult<TOut> OnSuccess<TOut>(Func<Task<Result<TOut>>> mapper) => OnSuccessA(mapper);
+        public async Task<Result<TOut>> OnSuccessA<TOut>(Func<Task<Result<TOut>>> mapper) =>
+            await (await this).OnSuccess(mapper);
 
-            return result as Result<TOut> ??
-                new Result<TOut>(default(TOut), result.Messages, isSuccessful: false);
-        }
+        public AsyncResult<TOut, TFailure> OnSuccess<TOut, TFailure>(Func<Result<TOut, TFailure>> mapper) => OnSuccessA(mapper);
+        public async Task<Result<TOut, TFailure> > OnSuccessA<TOut, TFailure>(Func<Result<TOut, TFailure>> mapper) =>
+            (await this).OnSuccess(mapper);
 
-        public AsyncResult WithMessages(params string[] messages) => WithMessagesA(messages);
-        private async Task<Result> WithMessagesA(string[] messages)
-        {
-            var result = await this;
-            result.Messages = result.Messages.Concat(messages);
-            return result;
-        }
+        public AsyncResult<TOut, TFailure> OnSuccess<TOut, TFailure>(Func<Task<Result<TOut, TFailure>>> mapper) => OnSuccessA(mapper);
+        public async Task<Result<TOut, TFailure> > OnSuccessA<TOut, TFailure>(Func<Task<Result<TOut, TFailure>>> mapper) =>
+            await (await this).OnSuccess(mapper);
+
+        public AsyncResult<TOut> OnSuccess<TOut>(Func<TOut> mapper) => OnSuccessA(mapper);
+        public async Task<Result<TOut>> OnSuccessA<TOut>(Func<TOut> mapper) =>
+            (await this).OnSuccess(mapper);
+
+        public AsyncResult<TOut> OnSuccess<TOut>(Func<Task<TOut>> mapper) => OnSuccessA(mapper);
+        public async Task<Result<TOut>> OnSuccessA<TOut>(Func<Task<TOut>> mapper) =>
+            await (await this).OnSuccess(mapper);
+
+        public AsyncResult OnFailure(Func<Result, Result> mapper) => OnFailureA(mapper);
+        public async Task<Result> OnFailureA(Func<Result, Result> mapper) =>
+            (await this).OnFailure(mapper);
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<Result, Result<TOut>> mapper) => OnFailureA(mapper);
+        public async Task<Result<TOut>> OnFailureA<TOut>(Func<Result, Result<TOut>> mapper) =>
+            (await this).OnFailure(mapper);
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<Result, Task<Result<TOut>>> mapper) => OnFailureA(mapper);
+        public async Task<Result<TOut>> OnFailureA<TOut>(Func<Result, Task<Result<TOut>>> mapper) =>
+            await (await this).OnFailure(mapper);
+
+        public AsyncResult<TOut, TFailure> OnFailure<TOut, TFailure>(Func<Result, Result<TOut, TFailure>> mapper) => OnFailureA(mapper);
+        public async Task<Result<TOut, TFailure>> OnFailureA<TOut, TFailure>(Func<Result, Result<TOut, TFailure>> mapper) =>
+            (await this).OnFailure(mapper);
+
+        public AsyncResult<TOut, TFailure> OnFailure<TOut, TFailure>(Func<Result, Task<Result<TOut, TFailure>>> mapper) => OnFailureA(mapper);
+        public async Task<Result<TOut, TFailure>> OnFailureA<TOut, TFailure>(Func<Result, Task<Result<TOut, TFailure>>> mapper) =>
+            await (await this).OnFailure(mapper);
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<Result, TOut> mapper) => OnFailureA(mapper);
+        public async Task<Result<TOut>> OnFailureA<TOut>(Func<Result, TOut> mapper) =>
+            (await this).OnFailure(mapper);
+
+        public AsyncResult<TOut> OnFailure<TOut>(Func<Result, Task<TOut>> mapper) => OnFailureA(mapper);
+        public async Task<Result<TOut>> OnFailureA<TOut>(Func<Result, Task<TOut>> mapper) =>
+            await (await this).OnFailure(mapper);
     }
 }

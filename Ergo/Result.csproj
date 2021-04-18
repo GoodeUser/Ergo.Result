@@ -4,6 +4,7 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <AssemblyName>Ergo</AssemblyName>
     <IsPackable>true</IsPackable>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -23,6 +24,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="./../icon.png" Pack="true" PackagePath="" />
