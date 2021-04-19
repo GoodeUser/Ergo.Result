@@ -8,7 +8,7 @@ namespace Ergo
 {
     public struct Result : IResult, IChainableResult
     {
-        private readonly List<string> _messages;
+        private List<string> _messages;
 
         public IReadOnlyList<string> Messages => _messages;
 
@@ -78,6 +78,14 @@ namespace Ergo
             return new Result<TOut>(default(TOut), Messages, isSuccessful: false);
         }
 
+        public AsyncResult OnSuccess(Func<Task<Result>> mapper)
+        {
+            if (IsSuccessful)
+                return mapper();
+
+            return Task.FromResult(new Result(Messages, isSuccessful: false));
+        }
+
         public AsyncResult<TOut> OnSuccess<TOut>(Func<Task<Result<TOut>>> mapper)
         {
             if (IsSuccessful)
@@ -119,6 +127,14 @@ namespace Ergo
         }
 
         public Result OnFailure(Func<Result, Result> mapper)
+        {
+            if (IsFailure)
+                return mapper(this);
+
+            return new Result(Messages, isSuccessful: true);
+        }
+
+        public AsyncResult OnFailure(Func<Result, Task<Result>> mapper)
         {
             if (IsFailure)
                 return mapper(this);
@@ -171,7 +187,13 @@ namespace Ergo
             if (IsFailure)
                 return mapper(this);
 
-            return new Result<TOut>(default(TOut), isSuccessful: true);
+            return Task.FromResult(new Result<TOut>(default(TOut), Messages, isSuccessful: true));
+        }
+
+        public Result WithMessages(params string[] messages)
+        {
+            this._messages.AddRange(messages);
+            return this;
         }
     }
 }

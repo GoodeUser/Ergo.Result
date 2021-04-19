@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace Ergo
 {
@@ -45,6 +46,14 @@ namespace Ergo
                 return mapper(_successValue);
 
             return new Result<TOut>(default(TOut), Messages, isSuccessful: false);
+        }
+
+        public AsyncResult OnSuccess(Func<TSuccess, Task<Result>> mapper)
+        {
+            if (IsSuccessful)
+                return mapper(_successValue);
+
+            return Task.FromResult(new Result(Messages, isSuccessful: false));
         }
 
         public AsyncResult<TOut> OnSuccess<TOut>(Func<TSuccess, AsyncResult<TOut>> mapper)
@@ -103,6 +112,14 @@ namespace Ergo
             return this is Result<TOut>
                 ? Unsafe.As<Result<TSuccess>, Result<TOut>>(ref this) // only create a new allocation if necessary
                 : new Result<TOut>(default(TOut), Messages, isSuccessful: true);
+        }
+
+        public AsyncResult OnFailure(Func<Result<TSuccess>, Task<Result>> mapper)
+        {
+            if (IsFailure)
+                return mapper(this);
+                
+            return Task.FromResult(new Result(Messages, isSuccessful: true));
         }
 
         public AsyncResult<TOut> OnFailure<TOut>(Func<Result<TSuccess>, AsyncResult<TOut>> mapper)
@@ -175,6 +192,12 @@ namespace Ergo
                 successValue,
                 Messages,
                 isSuccessful: true);
+        }
+
+        public Result<TSuccess> WithMessages(params string[] messages)
+        {
+            this._messages.AddRange(messages);
+            return this;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Ergo
     {
         Result OnSuccess(Func<TSuccess, Result> mapper);
         Result<TOut> OnSuccess<TOut>(Func<TSuccess, Result<TOut>> mapper);
+        AsyncResult OnSuccess(Func<TSuccess, Task<Result>> mapper);
         AsyncResult<TOut> OnSuccess<TOut>(Func<TSuccess, AsyncResult<TOut>> mapper);
         Result<TOut, TFailure> OnSuccess<TOut, TFailure>(Func<TSuccess, Result<TOut, TFailure>> mapper);
         AsyncResult<TOut, TFailure> OnSuccess<TOut, TFailure>(Func<TSuccess, AsyncResult<TOut, TFailure>> mapper);

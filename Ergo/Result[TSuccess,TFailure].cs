@@ -112,5 +112,11 @@ namespace Ergo
                 ? Unsafe.As<Result<TSuccess, TFailure>, Result<TOut, TFailure>>(ref this) // only create a new allocation if necessary
                 : new Result<TOut, TFailure>(default(TOut), default(TFailure), Messages, isSuccessful: true);
         }
+
+        public Result<TSuccess, TFailure> WithMessages(params string[] messages)
+        {
+            this._messages.AddRange(messages);
+            return this;
+        }
     }
 }
